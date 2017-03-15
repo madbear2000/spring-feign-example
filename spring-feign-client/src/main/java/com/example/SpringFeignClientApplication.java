@@ -1,5 +1,7 @@
 package com.example;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,8 +12,10 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 @EnableFeignClients
 public class SpringFeignClientApplication implements CommandLineRunner {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
     @Autowired 
-    private HelloFiegn helloFiegn;
+    private GreetingFeignResource greetingFeignResource;
     
     
 	public static void main(String[] args) {
@@ -21,8 +25,19 @@ public class SpringFeignClientApplication implements CommandLineRunner {
     @Override
     public void run(String... arg0) throws Exception {
        
-        System.out.println(helloFiegn.getMessage());
+    	String newGreeting = "Lá breá duit";
+    	String name = "Sean";
+    	
+    	logger.info("Example Feign Client with no auth");
+    	String result1 = greetingFeignResource.getMessage(name);
+        logger.info(result1);
         
+        logger.info("Updating message to: {}", newGreeting);
         
+        greetingFeignResource.updateMessage(newGreeting);
+        
+        String result2 = greetingFeignResource.getMessage(name);
+        
+        logger.info(result2);
     }
 }
