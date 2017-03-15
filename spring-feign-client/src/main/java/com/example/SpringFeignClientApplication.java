@@ -29,16 +29,15 @@ public class SpringFeignClientApplication implements CommandLineRunner {
     	String name = "Sean";
     	
     	logger.info("Example Feign Client with no auth");
-    	String result1 = greetingFeignResource.getMessageNoName();
-//        String result1 = greetingFeignResource.getMessage(name);
+    	String result1 = greetingFeignResource.getMessage(name);
         logger.info(result1);
-//        
-//        logger.info("Updating message to: {}", newGreeting);
-//        
-//        greetingFeignResource.updateMessage(newGreeting);
-//        
-//        String result2 = greetingFeignResource.getMessage(name);
-//        
-//        logger.info(result2);
+        
+        logger.info("Updating message to: {}", newGreeting);
+        
+        greetingFeignResource.updateMessage(newGreeting);
+        
+        String result2 = greetingFeignResource.getMessage(name);
+        
+        logger.info(result2);
     }
 }
