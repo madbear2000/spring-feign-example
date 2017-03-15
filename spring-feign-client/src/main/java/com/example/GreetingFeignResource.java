@@ -8,11 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import feign.Headers;
 
 //@FeignClient(name="service",configuration = FeignClientConfiguration.class)
-@FeignClient(name="greeting",configuration = FeignClientConfiguration.class)
+@FeignClient(name="greeting",configuration = FeignClientConfiguration.class, fallback = GreetingFeignResourceImpl.class)
 public interface GreetingFeignResource {
-    
-    @RequestMapping(method = RequestMethod.GET, value = "/message/sean")
-    String getMessageNoName();
     
     @RequestMapping(method = RequestMethod.GET, value = "/message/{name}")
     String getMessage(@PathVariable("name") String name);
@@ -22,3 +19,5 @@ public interface GreetingFeignResource {
     void updateMessage(@PathVariable("newGreeting") String message);
     
 }
+
+
