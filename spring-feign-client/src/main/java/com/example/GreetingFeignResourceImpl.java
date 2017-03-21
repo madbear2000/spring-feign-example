@@ -15,8 +15,14 @@ public class GreetingFeignResourceImpl implements GreetingFeignResource{
     }
 
     @Override
-    public void updateMessage(String message) {
+    public void updateMessage(Message message) {
         logger.warn("Failed to send update message to server");
+    }
+
+    @Override
+    public Message getGreeting() {
+        // TODO Auto-generated method stub
+        return new Message("No Result found", "Fallover");
     }
 
 }

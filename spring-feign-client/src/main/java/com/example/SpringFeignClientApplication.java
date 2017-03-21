@@ -32,12 +32,17 @@ public class SpringFeignClientApplication implements CommandLineRunner {
     	String result1 = greetingFeignResource.getMessage(name);
         logger.info(result1);
         
-        logger.info("Updating message to: {}", newGreeting);
+        logger.info("Checking Greeting before updating. {}", greetingFeignResource.getGreeting().toString());
         
-        greetingFeignResource.updateMessage(newGreeting);
+        logger.info("Updating message to: {}", newGreeting);
+        Message message = new Message(newGreeting, "client");
+        
+        greetingFeignResource.updateMessage(message);
         
         String result2 = greetingFeignResource.getMessage(name);
         
         logger.info(result2);
+        
+        logger.info("Checking Greeting after updating. {}", greetingFeignResource.getGreeting().toString());
     }
 }
